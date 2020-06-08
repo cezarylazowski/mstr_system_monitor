@@ -1,4 +1,3 @@
-#
 # consumer.py
 # June 07, 2020
 # monitor system stats like CPU/memory and publish to Kafka topic
@@ -32,11 +31,10 @@ consumer = KafkaConsumer(
      value_deserializer=lambda x: loads(x.decode('utf-8')))
 
 #set up df, counter
-df_system_cpu = pd.DataFrame(columns = ['timestamp'])
+df_system_cpu = pd.DataFrame()
 counter = 0
- 
 
-#read msg, append to df; every 10th msg write df to MSTR and flush df
+#read msg, append to df; every 10th msg write DF to MSTR and flush
 for message in consumer:
 
     counter += 1
@@ -46,12 +44,21 @@ for message in consumer:
     print(counter)
     print(message)
 
+    if counter == 1:
+        
+        ds = Dataset(connection=conn, name="system_monitor_cube")
+        ds.add_table(name="readings", data_frame=df_system_cpu, update_policy="Add")
+        ds.create(folder_id="E59B6FE611EA21D4EA960080EFC58828")
+        print(ds.dataset_id)
+
     if counter % 10 == 0:
 
         print(df_system_cpu)
         print('writing to cube...')
 
-        ds = Dataset(connection=conn, name="system_monitor_cube")
-        ds.add_table(name="readings", data_frame=df_system_cpu, update_policy="Add")
-        ds.create(folder_id="E59B6FE611EA21D4EA960080EFC58828")
-        df_system_cpu = df_system_cpu[0:0]
+        #ds = Dataset(connection=conn, dataset_id="16B14BFE11EAA9127F5B0080EF858BD2")
+        ds = Dataset(connection=conn, dataset_id=ds.dataset_id)
+
+        ds.add_table(name="readings", data_frame=df_system_cpu, update_policy="upsert")
+        ds.update()
+        ds.publish()
