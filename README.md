@@ -30,9 +30,12 @@ bin/kafka-topics.sh --describe --zookeeper 192.168.56.101:2181 --topic system_mo
 
 
 #
-#run python consumer & producer program
+# run python consumer & producer program
+# command line parameters:
+#     python3 producer.py reset     -- cube reset
+#     python3 producer.py noreset   -- no cube reset
 #
-python3 producer.py
+python3 producer.py reset
 python3 consumer.py
 
 
