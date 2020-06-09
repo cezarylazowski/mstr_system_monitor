@@ -23,7 +23,7 @@ conn = Connection(base_url, mstr_username, mstr_password, project_id=project_id,
 conn.connect()
 
 #connection to MSTR dataset
-ds = Dataset(connection=conn, name="system_monitor_cube")
+ds = Dataset(connection=conn, dataset_id="622B2AAA11EAAA7FD4B40080EF652DE6")
 print(ds.dataset_id)
 
 #kafka connection
@@ -49,7 +49,6 @@ for message in consumer:
     message = message.value
     df_system_cpu = df_system_cpu.append(message, ignore_index=True)
     print(message)
-    print(ds.dataset_id)
 
     if counter % 10 == 0:
 
@@ -59,3 +58,4 @@ for message in consumer:
         ds.add_table(name="readings", data_frame=df_system_cpu, update_policy="add")
         ds.update()
         ds.publish()
+

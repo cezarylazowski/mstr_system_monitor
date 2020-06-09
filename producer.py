@@ -1,4 +1,3 @@
-
 #
 # producer.py
 # June 07, 2020
@@ -21,6 +20,7 @@ from json import loads
 from mstrio.microstrategy import Connection
 from mstrio.dataset import Dataset
 
+#connect to kafka
 producer = KafkaProducer(bootstrap_servers=['192.168.56.101:9092'],
                          value_serializer=lambda x:
                          dumps(x).encode('utf-8'))
@@ -56,8 +56,7 @@ for e in range(100000):
     ip_address = socket.gethostbyname(hostname)
     
     #create msg
-    msg = {'date_time' : date_time, 'hostname' : hostname, 'id_address' : ip_address, 'timestamp' : timestamp, 'cpu' : cpu, 'mem' : mem_avail}
-    
+    msg = {'date_time' : date_time, 'hostname' : hostname, 'ip_address' : ip_address, 'timestamp' : timestamp, 'cpu' : cpu, 'mem_avail' : mem_avail}
   
     print(msg)
 
@@ -65,3 +64,4 @@ for e in range(100000):
     producer.send('system_monitor', value=msg)
     
     sleep(1)
+
