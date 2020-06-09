@@ -1,3 +1,4 @@
+
 #
 # producer.py
 # June 07, 2020
@@ -26,9 +27,7 @@ producer = KafkaProducer(bootstrap_servers=['192.168.56.101:9092'],
 
 #create empty df
 df_system_cpu = pd.DataFrame(columns = ['date_time','hostname','ip_address','timestamp','cpu','mem_avail'])
-
 df_system_cpu = df_system_cpu.astype({'date_time': 'datetime64', 'hostname': 'object','ip_address':'object','timestamp':'object','cpu':'float64','mem_avail':'float64'})
-
 
 #connect to mstr & create dataset
 mstr_username = "mstr"
@@ -58,7 +57,8 @@ for e in range(100000):
     
     #create msg
     msg = {'date_time' : date_time, 'hostname' : hostname, 'id_address' : ip_address, 'timestamp' : timestamp, 'cpu' : cpu, 'mem' : mem_avail}
-
+    
+  
     print(msg)
 
     #publish msg 
