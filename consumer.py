@@ -23,8 +23,9 @@ conn = Connection(base_url, mstr_username, mstr_password, project_id=project_id,
 conn.connect()
 
 #connection to MSTR dataset
-ds = Dataset(connection=conn, dataset_id="622B2AAA11EAAA7FD4B40080EF652DE6")
+ds = Dataset(connection=conn, dataset_id="AB23CF8811EAAAB59F310080EF150B0C")
 print(ds.dataset_id)
+
 
 #kafka connection
 consumer = KafkaConsumer(
@@ -36,8 +37,9 @@ consumer = KafkaConsumer(
      value_deserializer=lambda x: loads(x.decode('utf-8')))
 
 #create df - recreate dataset/cube
-df_system_cpu = pd.DataFrame(columns = ['date_time','hostname','ip_address','timestamp','cpu','mem_avail'])
-df_system_cpu = df_system_cpu.astype({'date_time': 'datetime64', 'hostname': 'object','ip_address':'object','timestamp':'object','cpu':'float64','mem_avail':'float64'})
+df_system_cpu = pd.DataFrame(columns = ['date_time','hostname','ip_address','timestamp','cpu_count','cpu_cores','cpu_core_1','cpu_core_2','vm_avail','vm_used','swap_memory','disk_io_read','disk_io_write','net_io_sent','net_io_recv'])
+
+df_system_cpu = df_system_cpu.astype({'date_time': 'datetime64', 'hostname': 'object','ip_address':'object','timestamp':'object','cpu_count': 'float64','cpu_cores': 'float64','cpu_core_1': 'float64','cpu_core_2': 'float64','vm_avail': 'float64','vm_used': 'float64','swap_memory': 'float64','disk_io_read': 'float64','disk_io_write': 'float64','net_io_sent': 'float64','net_io_recv': 'float64'})
 
 #counter
 counter = 0
@@ -50,7 +52,7 @@ for message in consumer:
     df_system_cpu = df_system_cpu.append(message, ignore_index=True)
     print(message)
 
-    if counter % 10 == 0:
+    if counter % 5 == 0:
 
         print(df_system_cpu.to_string())
         print('writing to cube...')
