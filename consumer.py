@@ -23,9 +23,9 @@ df_system_cpu = df_system_cpu.astype({'date_time': 'datetime64', 'hostname': 'ob
 
 
 #connect to mstr
-mstr_username = "mstr"
-mstr_password = "Qc4cXuRrBYCK"
-base_url = 'https://env-175743.customer.cloud.microstrategy.com/MicroStrategyLibrary/api'
+mstr_username = "######"
+mstr_password = "######"
+base_url = 'https://env-######.customer.cloud.microstrategy.com/MicroStrategyLibrary/api'
 login_mode = 1
 project_id = 'B7CA92F04B9FAE8D941C3E9B7E0CD754'
 
