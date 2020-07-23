@@ -1,4 +1,3 @@
-# mstr_system_monitor
 # June 6, 2020
 # cpu monitoring using python and push data to MSTR cube 
 
