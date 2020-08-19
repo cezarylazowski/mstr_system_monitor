@@ -1,5 +1,4 @@
-## June 6, 2020
-## cpu monitoring using python and push data to MSTR cube 
+## System monitoring using python, push data to MSTR cube 
 
 ## install software & packages
 sudo yum install gcc <br />
