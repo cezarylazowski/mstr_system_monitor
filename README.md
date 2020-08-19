@@ -19,12 +19,12 @@ bin/kafka-topics.sh --create --zookeeper 192.168.56.101:2181 --replication-facto
 bin/kafka-topics.sh --list --zookeeper 192.168.56.101:2181 <br />
 bin/kafka-topics.sh --describe --zookeeper 192.168.56.101:2181 --topic system_monitor <br />
 
-## run python consumer & producer program
-### python3 consumer.py reset     -- cube reset
-### python3 consumer.py noreset   -- no cube reset
-
+## run python producer
 python3 producer.py  <br />
-python3 consumer.py reset <br />
+
+## run python consumer
+python3 consumer.py reset OR <br />
+python3 consumer.py noreset <br />
 
 ## cleanup
 cd /opt/kafka_2.12-2.3.0  <br />
