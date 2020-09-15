@@ -1,5 +1,8 @@
 ## System monitoring using python, push data to MSTR cube 
 
+#### install mysterio
+https://github.com/MicroStrategy/mstrio-py#install-the-mstrio-py-package
+
 #### install software & packages
 sudo yum install gcc <br />
 sudo yum install python3-devel OR sudo yum install python3-dev <br />
