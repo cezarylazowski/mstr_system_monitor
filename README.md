@@ -1,6 +1,6 @@
 ## System monitoring using python, push data to MSTR cube 
 
-#### install mysterio
+#### install mstrio
 https://github.com/MicroStrategy/mstrio-py#install-the-mstrio-py-package
 
 #### install software & packages
